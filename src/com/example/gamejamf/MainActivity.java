@@ -76,6 +76,7 @@ public class MainActivity extends Activity {
 			switch(v.getId()) {
 			case R.id.taskText1:
 				textviewEvent(taskText1);
+				
 				break;
 			case R.id.taskText2:
 				textviewEvent(taskText2);
@@ -100,6 +101,8 @@ public class MainActivity extends Activity {
 		Paint paint = tv.getPaint();
 		paint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 		paint.setAntiAlias(true);
+		//儲存拼圖
+		savePuzzle();
 	}
 	
 	//底下按鈕的方法
@@ -132,11 +135,12 @@ public class MainActivity extends Activity {
 		PuzzleDB pdb = new PuzzleDB(this);
 		SQLiteDatabase db = pdb.getWritableDatabase();
 		ContentValues args = new ContentValues();
-		args.put("PUZZLE_FRAG", dp.draw());
+		int i = dp.draw();
+		args.put("PUZZLE_FRAG", i);
 		long rowid = db.insert("INCOME", null, args);
 		Log.i("PuzzleDB","SQL:record inserted, id=" + rowid);
-//		Toast.makeText(this, "One record inserted, id=" + rowid,
-//		          Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Congratulations, get NO." + i + "puzzle",
+		          Toast.LENGTH_LONG).show();
 		db.close();
 		
 	}

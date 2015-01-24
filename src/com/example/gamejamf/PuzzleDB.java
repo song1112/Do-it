@@ -12,7 +12,7 @@ public class PuzzleDB extends SQLiteOpenHelper{
 	private static final String INCOME_CREATE_DDL = 
 		      "CREATE TABLE INCOME ("
 		      + "_ID INTEGER PRIMARY KEY," 
-		      + "PUZZLE_FRAG INT);";
+		      + "PUZZLE_FRAG TEXT);";
 	private static final String INCOME_DELETE_DDL = 
 		      "DROP TABLE IF EXISTS INCOME;";
 	public PuzzleDB(Context context, String name, CursorFactory factory,
