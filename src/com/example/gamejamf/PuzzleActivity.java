@@ -17,7 +17,7 @@ public class PuzzleActivity extends Activity {
 	View puzzle;
 	Button home_btn, puzzle_btn, task_btn; //底下的主鍵
 	ImageView frag1, frag2, frag3, frag4, frag5, frag6, frag7, frag8, frag9 ;
-	//frag6, frag7, frag8, frag9
+
 	Set<String> flags; //存已獲得的拼圖
 //	String 
 	@Override
@@ -46,7 +46,8 @@ public class PuzzleActivity extends Activity {
 		frag7 = (ImageView)findViewById(R.id.frag7);
 		frag8 = (ImageView)findViewById(R.id.frag8);
 		frag9 = (ImageView)findViewById(R.id.frag9);
-		
+		puzzleEnabled();
+		//因為只有五章拼圖
 		frag1.setOnClickListener(imageListener);
 		frag2.setOnClickListener(imageListener);
 		frag3.setOnClickListener(imageListener);
@@ -62,124 +63,240 @@ public class PuzzleActivity extends Activity {
 		
 		@Override
 		public void onClick(View v) {
-			coverUnknown();//先複蓋所有的牌
-			getPuzzleDB();//取得已獲得的牌
+			coverUnknown();//先複蓋所有的拼圖
+			getPuzzleDB();//取得已獲得的拼圖
 			switch(v.getId()) {
 			case R.id.frag1:
-				puzzle0Event(0);
-				puzzle1Event(0);
+				puzzle1Event();	//第一組的九張拼圖
+				puzzleNotEnabled();
 				break;
 			case R.id.frag2:
-				puzzle0Event(1);
-				puzzle1Event(1);
+				puzzle2Event();//第二組的九張拼圖
+				puzzleNotEnabled();
 				break;
 			case R.id.frag3:
-				puzzle0Event(2);
-				puzzle1Event(2);
+				puzzle3Event();//第三組的九張拼圖
+				puzzleNotEnabled();
 				break;
 			case R.id.frag4:
-				puzzle0Event(3);
-				puzzle1Event(3);
+				puzzle4Event();//第四組的九張拼圖
+				puzzleNotEnabled();
 				break;
 			case R.id.frag5:
-				puzzle0Event(4);
-				puzzle1Event(4);
+				puzzle5Event();//第五組的九張拼圖
+				puzzleNotEnabled();
 				break;
 
 			}
 		}
+
+		
 	};
 	
-	
-	//每個大拼圖的第一格
-	private void puzzle0Event(int i) {
-		switch(i) {
-		case 0:
-			for (String s:flags) {
-				int t = Integer.parseInt(s);
-				if(t==0) {
-					frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle0));
-				}
-			}
-			break;
-		case 1:
-			for (String s:flags) {
-				int t = Integer.parseInt(s);
-				if(t==9) {
-					frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle9));
-				}
-			}
-			break;
-		case 2:
-			for (String s:flags) {
-				int t = Integer.parseInt(s);
-				if(t==18) {
-					frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle18));
-				}
-			}
-			break;
-		case 3:
-			for (String s:flags) {
-				int t = Integer.parseInt(s);
-				if(t==27) {
-					frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle18));
-				}
-			}
-			break;
-		case 4:		
-			for (String s:flags) {
-				int t = Integer.parseInt(s);
-				if(t==36) {
-					frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle18));
+	private void puzzle2Event() {
+		// TODO Auto-generated method stub
+		for (int i=9;i<18;i++) {	//所屬第二組的拼圖編號
+			for(String s:flags) {	//資料庫裡獲得的拼圖碎片
+				int tmp = Integer.parseInt(s);
+				if(i == tmp) {	//如果有相等的就拼上去
+					switch(i) {
+					case 9:
+						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle9));
+						break;
+					case 10:
+						frag2.setImageDrawable(getResources().getDrawable(R.drawable.puzzle10));
+						break;
+					case 11:
+						frag3.setImageDrawable(getResources().getDrawable(R.drawable.puzzle11));
+						break;
+					case 12:
+						frag4.setImageDrawable(getResources().getDrawable(R.drawable.puzzle12));
+						break;
+					case 13:
+						frag5.setImageDrawable(getResources().getDrawable(R.drawable.puzzle13));
+						break;
+					case 14:
+						frag6.setImageDrawable(getResources().getDrawable(R.drawable.puzzle14));
+						break;
+					case 15:
+						frag7.setImageDrawable(getResources().getDrawable(R.drawable.puzzle15));
+						break;
+					case 16:
+						frag8.setImageDrawable(getResources().getDrawable(R.drawable.puzzle16));
+						break;
+					case 17:
+						frag9.setImageDrawable(getResources().getDrawable(R.drawable.puzzle17));
+						break;
+						
+					}
 				}
 			}
 		}
 	}
 	
-	//每個大拼圖的第一格
-		private void puzzle1Event(int i) {
-			switch(i) {
-			case 0:
-				for (String s:flags) {
-					int t = Integer.parseInt(s);
-					if(t==1) {
-						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle1));
-					}
-				}
-				break;
-			case 1:
-				for (String s:flags) {
-					int t = Integer.parseInt(s);
-					if(t==10) {
-						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle9));
-					}
-				}
-				break;
-			case 2:
-				for (String s:flags) {
-					int t = Integer.parseInt(s);
-					if(t==19) {
-						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle18));
-					}
-				}
-				break;
-			case 3:
-				for (String s:flags) {
-					int t = Integer.parseInt(s);
-					if(t==28) {
-						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle18));
-					}
-				}
-				break;
-			case 4:		
-				for (String s:flags) {
-					int t = Integer.parseInt(s);
-					if(t==37) {
-						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle18));
+	private void puzzle5Event() {
+		// TODO Auto-generated method stub
+		for (int i=36;i<45;i++) {
+			for(String s:flags) {
+				int tmp = Integer.parseInt(s);
+				if(i == tmp) {
+					switch(i) {
+					case 36:
+						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle36));
+						break;
+					case 37:
+						frag2.setImageDrawable(getResources().getDrawable(R.drawable.puzzle37));
+						break;
+					case 38:
+						frag3.setImageDrawable(getResources().getDrawable(R.drawable.puzzle38));
+						break;
+					case 39:
+						frag4.setImageDrawable(getResources().getDrawable(R.drawable.puzzle39));
+						break;
+					case 40:
+						frag5.setImageDrawable(getResources().getDrawable(R.drawable.puzzle40));
+						break;
+					case 41:
+						frag6.setImageDrawable(getResources().getDrawable(R.drawable.puzzle41));
+						break;
+					case 42:
+						frag7.setImageDrawable(getResources().getDrawable(R.drawable.puzzle42));
+						break;
+					case 43:
+						frag8.setImageDrawable(getResources().getDrawable(R.drawable.puzzle43));
+						break;
+					case 44:
+						frag9.setImageDrawable(getResources().getDrawable(R.drawable.puzzle44));
+						break;
+						
 					}
 				}
 			}
 		}
+	}
+
+	private void puzzle4Event() {
+		// TODO Auto-generated method stub
+		for (int i=27;i<35;i++) {
+			for(String s:flags) {
+				int tmp = Integer.parseInt(s);
+				if(i == tmp) {
+					switch(i) {
+					case 27:
+						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle27));
+						break;
+					case 28:
+						frag2.setImageDrawable(getResources().getDrawable(R.drawable.puzzle28));
+						break;
+					case 29:
+						frag3.setImageDrawable(getResources().getDrawable(R.drawable.puzzle29));
+						break;
+					case 30:
+						frag4.setImageDrawable(getResources().getDrawable(R.drawable.puzzle30));
+						break;
+					case 31:
+						frag5.setImageDrawable(getResources().getDrawable(R.drawable.puzzle31));
+						break;
+					case 32:
+						frag6.setImageDrawable(getResources().getDrawable(R.drawable.puzzle32));
+						break;
+					case 33:
+						frag7.setImageDrawable(getResources().getDrawable(R.drawable.puzzle33));
+						break;
+					case 34:
+						frag8.setImageDrawable(getResources().getDrawable(R.drawable.puzzle34));
+						break;
+					case 35:
+						frag9.setImageDrawable(getResources().getDrawable(R.drawable.puzzle35));
+						break;
+						
+					}
+				}
+			}
+		}
+	}
+
+	private void puzzle3Event() {
+		// TODO Auto-generated method stub
+		for (int i=18;i<27;i++) {
+			for(String s:flags) {
+				int tmp = Integer.parseInt(s);
+				if(i == tmp) {
+					switch(i) {
+					case 18:
+						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle18));
+						break;
+					case 19:
+						frag2.setImageDrawable(getResources().getDrawable(R.drawable.puzzle19));
+						break;
+					case 20:
+						frag3.setImageDrawable(getResources().getDrawable(R.drawable.puzzle20));
+						break;
+					case 21:
+						frag4.setImageDrawable(getResources().getDrawable(R.drawable.puzzle21));
+						break;
+					case 22:
+						frag5.setImageDrawable(getResources().getDrawable(R.drawable.puzzle22));
+						break;
+					case 23:
+						frag6.setImageDrawable(getResources().getDrawable(R.drawable.puzzle23));
+						break;
+					case 24:
+						frag7.setImageDrawable(getResources().getDrawable(R.drawable.puzzle24));
+						break;
+					case 25:
+						frag8.setImageDrawable(getResources().getDrawable(R.drawable.puzzle25));
+						break;
+					case 26:
+						frag9.setImageDrawable(getResources().getDrawable(R.drawable.puzzle26));
+						break;
+						
+					}
+				}
+			}
+		}
+	}
+
+	private void puzzle1Event() {
+		for (int i=0;i<9;i++) {
+			for(String s:flags) {
+				int tmp = Integer.parseInt(s);
+				if(i == tmp) {
+					switch(i) {
+					case 0:
+						frag1.setImageDrawable(getResources().getDrawable(R.drawable.puzzle0));
+						break;
+					case 1:
+						frag2.setImageDrawable(getResources().getDrawable(R.drawable.puzzle1));
+						break;
+					case 2:
+						frag3.setImageDrawable(getResources().getDrawable(R.drawable.puzzle2));
+						break;
+					case 3:
+						frag4.setImageDrawable(getResources().getDrawable(R.drawable.puzzle3));
+						break;
+					case 4:
+						frag5.setImageDrawable(getResources().getDrawable(R.drawable.puzzle4));
+						break;
+					case 5:
+						frag6.setImageDrawable(getResources().getDrawable(R.drawable.puzzle5));
+						break;
+					case 6:
+						frag7.setImageDrawable(getResources().getDrawable(R.drawable.puzzle6));
+						break;
+					case 7:
+						frag8.setImageDrawable(getResources().getDrawable(R.drawable.puzzle7));
+						break;
+					case 8:
+						frag9.setImageDrawable(getResources().getDrawable(R.drawable.puzzle8));
+						break;
+						
+					}
+				}
+			}
+		}
+	}
+
 	private void getPuzzleDB() {
 		PuzzleDB pdb = new PuzzleDB(this);
 		SQLiteDatabase db = pdb.getWritableDatabase();
@@ -196,6 +313,30 @@ public class PuzzleActivity extends Activity {
 		
 	}
 	
+	//所有牌不可點擊
+	private void puzzleNotEnabled() {
+		frag1.setEnabled(false);
+		frag2.setEnabled(false);
+		frag3.setEnabled(false);
+		frag4.setEnabled(false);
+		frag5.setEnabled(false);
+		frag6.setEnabled(false);
+		frag7.setEnabled(false);
+		frag8.setEnabled(false);
+		frag9.setEnabled(false);
+	}
+	//所有牌可點擊
+	private void puzzleEnabled() {
+		frag1.setEnabled(true);
+		frag2.setEnabled(true);
+		frag3.setEnabled(true);
+		frag4.setEnabled(true);
+		frag5.setEnabled(true);
+		frag6.setEnabled(true);
+		frag7.setEnabled(true);
+		frag8.setEnabled(true);
+		frag9.setEnabled(true);
+	}
 	//複蓋所有的牌
 	private void coverUnknown() {
 		frag1.setImageDrawable(getResources().getDrawable(R.drawable.none));

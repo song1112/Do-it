@@ -4,9 +4,13 @@ package com.example.gamejamf;
 
 
 
+import java.util.Random;
+
+import com.ant.liao.GifView;
+import com.ant.liao.GifView.GifImageType;
+
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -14,9 +18,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -26,15 +29,17 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	Intent intent;
 	View home;
-	Button home_btn, puzzle_btn, task_btn; //���U���D��
+	Button home_btn, puzzle_btn, task_btn; 
 	SharedPreferences getTask;
-	Button start1, start2, start3, start4, start5; //�}�l�������s
 	TextView taskText1, taskText2, taskText3, taskText5, taskText4;
-	
+	Random rand = new Random();
+	int scene=0;
+	GifView gf1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		
 		//set bottom click event
 		home = (View)findViewById(R.id.home);
@@ -46,66 +51,148 @@ public class MainActivity extends Activity {
 		puzzle_btn.setOnClickListener(mainListener);
 		task_btn.setOnClickListener(mainListener);
 		
+		//設定動畫
+		//取得螢幕大小
+		DisplayMetrics metrics = new DisplayMetrics();  
+	    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+	    //設定動畫
+		gf1 = (GifView)findViewById(R.id.gif1);
+		changeScene();
+		gf1.setShowDimension(metrics.widthPixels, metrics.heightPixels*3/7);
+		gf1.setGifImageType(GifImageType.COVER);
+
 		
-		
-		
+		//任務訊息
 		taskText1 = (TextView)findViewById(R.id.taskText1);
 		taskText2 = (TextView)findViewById(R.id.taskText2);
 		taskText3 = (TextView)findViewById(R.id.taskText3);
 		taskText4 = (TextView)findViewById(R.id.taskText4);
 		taskText5 = (TextView)findViewById(R.id.taskText5);
-		
+		getTask = getSharedPreferences("DATA",0);
+		//設置已獲得的任務
+		setTask();
 		taskText1.setOnClickListener(textListener);
 		taskText2.setOnClickListener(textListener);
 		taskText3.setOnClickListener(textListener);
 		taskText4.setOnClickListener(textListener);
 		taskText5.setOnClickListener(textListener);
 		// set SharedPreferences
-		getTask = getSharedPreferences("DATA",0);
 		
-		//
 		
-		setTask();
+		//檢查是否有完成事項
+		checkTask();
+		
 	}
 	
+
+	//改變場景
+	private void changeScene() {
+		scene  = rand.nextInt(3);
+		switch(scene) {
+		case 0:
+			
+			gf1.setGifImage(R.drawable.waving);
+			Log.i("change", "sence:0");
+			break;
+		case 1:
+			
+			gf1.setGifImage(R.drawable.mopping_kitchen);
+			Log.i("change", "sence:1");
+			break;
+		case 2:
+			
+			gf1.setGifImage(R.drawable.house);
+			Log.i("change", "sence:2");
+		}
+		
+	}
+	
+	//點擊完成任務
 	private OnClickListener textListener = new OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			//如果textview內沒東西代表未接取任務，則無法勾取
+			
 			switch(v.getId()) {
 			case R.id.taskText1:
+				if(taskText1.getText() != "") {
 				textviewEvent(taskText1);
-				
+				//獲得並儲存拼圖
+				savePuzzle();
+				//儲存完成的任務
+				getTask.edit().putBoolean("finish01",true).commit();
+				//changeScene();
+				}
 				break;
 			case R.id.taskText2:
+				if(taskText2.getText() != "") {
 				textviewEvent(taskText2);
+				savePuzzle();
+				getTask.edit().putBoolean("finish02",true).commit();
+				//changeScene();
+				}
 				break;
 			case R.id.taskText3:
+				if(taskText3.getText() != "") {
 				textviewEvent(taskText3);
+				savePuzzle();
+				getTask.edit().putBoolean("finish03",true).commit();
+				//changeScene();
+				}
 				break;
 			case R.id.taskText4:
+				if(taskText4.getText() != "") {
 				textviewEvent(taskText4);
+				savePuzzle();
+				getTask.edit().putBoolean("finish04",true).commit();
+				//changeScene();
+				}
 				break;
 			case R.id.taskText5:
+				if(taskText5.getText() != "") {
 				textviewEvent(taskText5);
+				savePuzzle();
+				getTask.edit().putBoolean("finish05",true).commit();
+				//changeScene();
+				}
 				break;
 			}
 		}
 	};
 	
+	//檢查任務是否已被完成
+	public void checkTask() {
+		if(getTask.getBoolean("finish01", false))
+			textviewEvent(taskText1);
+		
+		if(getTask.getBoolean("finish02", false))
+			textviewEvent(taskText2);
+		
+		if(getTask.getBoolean("finish03", false))
+			textviewEvent(taskText3);
+		
+		if(getTask.getBoolean("finish04", false))
+			textviewEvent(taskText4);
+		
+		if(getTask.getBoolean("finish05", false))
+			textviewEvent(taskText5);
+	}
+	//textview變換成打勾圖案，文字畫刪除線
 	public void textviewEvent(TextView tv) {
 		Resources res = this.getResources();
         Drawable drawable = res.getDrawable(R.drawable.mission_ok);
 		tv.setBackground(drawable);
+		tv.setEnabled(false);
 		Paint paint = tv.getPaint();
 		paint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 		paint.setAntiAlias(true);
-		//�x�s����
-		savePuzzle();
+		
+		
 	}
 	
-	//���U���s����k
+	//下方主按鈕
 	private OnClickListener mainListener = new OnClickListener() {
 
 		@Override
@@ -129,7 +216,7 @@ public class MainActivity extends Activity {
 	
 	};
 	
-	//�s�d��
+	//
 	public void savePuzzle() {
 		DrawnPuzzles dp = new DrawnPuzzles();
 		PuzzleDB pdb = new PuzzleDB(this);

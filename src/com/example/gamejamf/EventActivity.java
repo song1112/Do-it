@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,7 +19,7 @@ import android.widget.TimePicker;
 
 public class EventActivity extends Activity{
 	View event;
-	Button home_btn, puzzle_btn, task_btn; //���U���D��
+	Button home_btn, puzzle_btn, task_btn; //���U���D��
 	TextView task1, task2, task3, task4, task5;
 	TaskGenerator tg;
 	SharedPreferences saveTask;
@@ -35,13 +36,17 @@ public class EventActivity extends Activity{
 		home_btn.setOnClickListener(mainListener);
 		puzzle_btn.setOnClickListener(mainListener);
 		task_btn.setOnClickListener(mainListener);
+		
+		//任務產生器
 		 tg = new TaskGenerator();
+		 
 		task1 = (TextView)findViewById(R.id.task1);
 		task2 = (TextView)findViewById(R.id.task2);
 		task3 = (TextView)findViewById(R.id.task3);
 		task4 = (TextView)findViewById(R.id.task4);
 		task5 = (TextView)findViewById(R.id.task5);
 		saveTask = getSharedPreferences("DATA",0);
+		
 		task1.setOnClickListener(eventListener);
 		task2.setOnClickListener(eventListener);
 		task3.setOnClickListener(eventListener);
@@ -49,9 +54,23 @@ public class EventActivity extends Activity{
 		task5.setOnClickListener(eventListener);
 		
 		setTask();
+		isReceived();
 	}
 			
-	//���������s�ƥ�
+	//判斷是否已接取任務
+	private void isReceived() {
+		if(saveTask.getBoolean("receive1", false)) 
+			getTaskEvent(task1);
+		if(saveTask.getBoolean("receive2", false))
+			getTaskEvent(task2);
+		if(saveTask.getBoolean("receive3", false))
+			getTaskEvent(task3);
+		if(saveTask.getBoolean("receive4", false))
+			getTaskEvent(task4);
+		if(saveTask.getBoolean("receive5", false))
+			getTaskEvent(task5);
+	}
+	//下方按鈕的東東
 	private OnClickListener mainListener = new OnClickListener() {
 
 		@Override
@@ -75,6 +94,9 @@ public class EventActivity extends Activity{
 		}
 			
 	};
+	
+	
+	//接任務事件
 	private OnClickListener eventListener = new OnClickListener() {
 		
 		@Override
@@ -84,38 +106,45 @@ public class EventActivity extends Activity{
 			{      
 			case R.id.task1:
 //				s = getTime();
-				saveTask.edit().putString("TASK1", task1.getText().toString()).commit();
-				task1.setEnabled(false);
-				task1.setText("Done");
+				saveTask.edit().putString("TASK1", task1.getText().toString()).
+								putBoolean("receive1", true).commit();
+				getTaskEvent(task1);
 				break;
 			case R.id.task2:
 //				s = getTime();
-				saveTask.edit().putString("TASK2", task2.getText().toString()).commit();
-				task2.setEnabled(false);
-				task2.setText("Done");
+				saveTask.edit().putString("TASK2", task2.getText().toString())
+				.putBoolean("receive2", true).commit();
+				getTaskEvent(task2);
 				break;
 			case R.id.task3:
 //				s = getTime();
-				saveTask.edit().putString("TASK3", task3.getText().toString()).commit();
-				task3.setEnabled(false);
-				task3.setText("Done");
+				saveTask.edit().putString("TASK3", task3.getText().toString())
+				.putBoolean("receive3", true).commit();
+				getTaskEvent(task3);
 				break;
 			case R.id.task4:
 //				s = getTime();
-				saveTask.edit().putString("TASK4", task4.getText().toString()).commit();
-				task4.setEnabled(false);
-				task4.setText("Done");
+				saveTask.edit().putString("TASK4", task4.getText().toString())
+				.putBoolean("receive4", true).commit();
+				getTaskEvent(task4);
 				break;
 			case R.id.task5:
 //				s = getTime();
-				saveTask.edit().putString("TASK5", task5.getText().toString()).commit();
-				task5.setEnabled(false);
-				task5.setText("Done");
+				saveTask.edit().putString("TASK5", task5.getText().toString())
+				.putBoolean("receive5", true).commit();
+				getTaskEvent(task5);
 				break;
 			}
 			
 		}
 	};
+	
+	//取得任務後選項不可互動
+	private void getTaskEvent(TextView tv) {
+		tv.setEnabled(false);
+		tv.setText("Done");
+		tv.setTextColor(Color.RED);
+	}
 	
 //	//time
 //	 private String getTime() {

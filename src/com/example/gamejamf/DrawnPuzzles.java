@@ -4,28 +4,28 @@ import java.util.Random;
 
 public class DrawnPuzzles {
 	Random rand = new Random();
-	int[] puzzle = new int[27];
+	int[] puzzle = new int[45];
 	
 	public DrawnPuzzles() {
 		for (int i=0;i<puzzle.length;i++) {
 			puzzle[i] = i;
 		}
 	}
-	//¬~µPµ{¦¡
+	//æ´—ç‰Œ
 	public void shuffle() {
 		
 		for(int i=0;i<27;i++) {
-			int p = rand.nextInt(27); //ÀH¾÷ªº¦ì¸m
-			int temp = puzzle[i]; //¼È¦s
-			puzzle[i] = puzzle[p]; //¥æ´«
+			int p = rand.nextInt(45); 
+			int temp = puzzle[i]; 
+			puzzle[i] = puzzle[p]; 
 			puzzle[p] = temp;
 		}
 		
 	}
 	
-	//©â«÷¹Ï
+	//æŠ½ç‰Œ
 	public int draw() {
-		return puzzle[rand.nextInt(27)];
+		return puzzle[rand.nextInt(45)];
 		//return puzzle[i];
 	}
 	
