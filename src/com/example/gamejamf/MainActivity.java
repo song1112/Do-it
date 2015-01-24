@@ -9,7 +9,10 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -51,14 +54,52 @@ public class MainActivity extends Activity {
 		taskText3 = (TextView)findViewById(R.id.taskText3);
 		taskText4 = (TextView)findViewById(R.id.taskText4);
 		taskText5 = (TextView)findViewById(R.id.taskText5);
-
 		
+		taskText1.setOnClickListener(textListener);
+		taskText2.setOnClickListener(textListener);
+		taskText3.setOnClickListener(textListener);
+		taskText4.setOnClickListener(textListener);
+		taskText5.setOnClickListener(textListener);
 		// set SharedPreferences
 		getTask = getSharedPreferences("DATA",0);
 		
 		//
 		
 		setTask();
+	}
+	
+	private OnClickListener textListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch(v.getId()) {
+			case R.id.taskText1:
+				textviewEvent(taskText1);
+				break;
+			case R.id.taskText2:
+				textviewEvent(taskText2);
+				break;
+			case R.id.taskText3:
+				textviewEvent(taskText3);
+				break;
+			case R.id.taskText4:
+				textviewEvent(taskText4);
+				break;
+			case R.id.taskText5:
+				textviewEvent(taskText5);
+				break;
+			}
+		}
+	};
+	
+	public void textviewEvent(TextView tv) {
+		Resources res = this.getResources();
+        Drawable drawable = res.getDrawable(R.drawable.mission_ok);
+		tv.setBackground(drawable);
+		Paint paint = tv.getPaint();
+		paint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+		paint.setAntiAlias(true);
 	}
 	
 	//底下按鈕的方法

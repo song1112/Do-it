@@ -13,12 +13,14 @@ public class DrawnPuzzles {
 	}
 	//洗牌程式
 	public void shuffle() {
+		
 		for(int i=0;i<27;i++) {
 			int p = rand.nextInt(27); //隨機的位置
 			int temp = puzzle[i]; //暫存
 			puzzle[i] = puzzle[p]; //交換
-			puzzle[p] = puzzle[i];
+			puzzle[p] = temp;
 		}
+		
 	}
 	
 	//抽拼圖
