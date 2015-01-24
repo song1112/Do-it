@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/background" >
 	
     <ImageView
         android:id="@+id/imageView0"
@@ -10,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="20"
         android:scaleType="fitXY"
-        android:src="@drawable/puzzle_top" />
+        android:src="@drawable/puzzle_top"
+        android:padding="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,8 +30,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon01" />
+                android:scaleType="fitXY"
+                android:src="@drawable/puzzle_icon0" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -37,15 +39,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon02" />
+                android:src="@drawable/puzzle_icon1" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon03" />
+                android:scaleType="fitXY"
+                android:src="@drawable/puzzle_icon2" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,24 +60,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon04" />
+                android:scaleType="fitXY"
+                android:src="@drawable/puzzle_icon3" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon05" />
+                android:scaleType="fitXY"
+                android:src="@drawable/puzzle_icon4" />
 
             <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon06" />
+                android:scaleType="fitXY"
+                android:src="@drawable/none" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,24 +90,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon07" />
+                android:scaleType="fitXY"
+                android:src="@drawable/none" />
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon08" />
+                android:scaleType="fitXY"
+                android:src="@drawable/none" />
 
             <ImageView
                 android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/puzzle_icon09" />
+                android:scaleType="fitXY"
+                android:src="@drawable/none" />
         </LinearLayout>
     </LinearLayout>
 
