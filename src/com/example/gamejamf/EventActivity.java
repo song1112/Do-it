@@ -9,7 +9,9 @@ import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,6 +25,7 @@ public class EventActivity extends Activity{
 	TextView task1, task2, task3, task4, task5;
 	TaskGenerator tg;
 	SharedPreferences saveTask;
+	int today;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,8 +56,23 @@ public class EventActivity extends Activity{
 		task4.setOnClickListener(eventListener);
 		task5.setOnClickListener(eventListener);
 		
+		//取得現在日期
+		Calendar c=Calendar.getInstance();
+		today = c.get(Calendar.DAY_OF_MONTH);
+
+		if(today!=saveTask.getInt("day", 0)) {
+//			Log.i("date","date:" + today + "..." + saveTask.getInt("day", 0));
+			saveTask.edit().clear().commit();
+			saveTask.edit().putInt("day", today).commit(); //將儲存日期為今天
+		}
+		
+		
 		setTask();
 		isReceived();
+		
+		//每一天的登入更新資料
+		//如果今天日期不等於儲存日期，清除所有資料
+		
 	}
 			
 	//判斷是否已接取任務
@@ -80,10 +98,12 @@ public class EventActivity extends Activity{
 			switch (v.getId())
 			{      
 				case R.id.home_btn:  
+					playMusic();
 				   intent = new Intent(EventActivity.this, MainActivity.class);
 				   startActivity(intent);
 				   break;
 				case R.id.puzzle_btn: 
+					playMusic();
 					intent = new Intent(EventActivity.this, PuzzleActivity.class);
 					startActivity(intent);
 				   break;
@@ -146,23 +166,13 @@ public class EventActivity extends Activity{
 		tv.setTextColor(Color.RED);
 	}
 	
-//	//time
-//	 private String getTime() {
-//
-//		TimePickerDialog time = new TimePickerDialog(this,new OnTimeSetListener() {
-//			
-//			@Override
-//			public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//				String taskTime = hourOfDay + ":" + minute;
-//				saveTask.edit().putString("TIME", taskTime).commit();
-//				
-//			}
-//		}, 0, 0, true);
-//		time.show();
-//		
-//		return saveTask.getString("TIME", "");
-//	 }
              
+	protected void playMusic() {
+		// TODO Auto-generated method stub
+		MediaPlayer mp = MediaPlayer.create(EventActivity.this, R.raw.push);
+  	    mp.start();
+	}
+
 	public void setTask() {
 
 		task1.setText(tg.getTask(0));

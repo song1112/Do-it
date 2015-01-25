@@ -16,8 +16,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -50,6 +53,9 @@ public class MainActivity extends Activity {
 		home_btn = (Button)home.findViewById(R.id.home_btn);
 		puzzle_btn = (Button)home.findViewById(R.id.puzzle_btn);
 		task_btn = (Button)home.findViewById(R.id.task_btn);
+		
+		
+		
 		
 		home_btn.setOnClickListener(mainListener);
 		puzzle_btn.setOnClickListener(mainListener);
@@ -144,7 +150,7 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			//如果textview內沒東西代表未接取任務，則無法勾取
-			
+			Intent intent_camera = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 			switch(v.getId()) {
 			case R.id.taskText1:
 				if(taskText1.getText() != "") {
@@ -154,7 +160,7 @@ public class MainActivity extends Activity {
 				//儲存完成的任務
 				getTask.edit().putBoolean("finish01",true).commit();
 				//changeScene();
-				
+				startActivityForResult(intent_camera, 0);
 				}
 				break;
 			case R.id.taskText2:
@@ -163,7 +169,7 @@ public class MainActivity extends Activity {
 				savePuzzle();
 				getTask.edit().putBoolean("finish02",true).commit();
 				//changeScene();
-				
+				startActivityForResult(intent_camera, 0);
 				}
 				break;
 			case R.id.taskText3:
@@ -172,6 +178,7 @@ public class MainActivity extends Activity {
 				savePuzzle();
 				getTask.edit().putBoolean("finish03",true).commit();
 				//changeScene();
+				startActivityForResult(intent_camera, 0);
 				}
 				break;
 			case R.id.taskText4:
@@ -180,6 +187,7 @@ public class MainActivity extends Activity {
 				savePuzzle();
 				getTask.edit().putBoolean("finish04",true).commit();
 				//changeScene();
+				startActivityForResult(intent_camera, 0);
 				}
 				break;
 			case R.id.taskText5:
@@ -188,11 +196,36 @@ public class MainActivity extends Activity {
 				savePuzzle();
 				getTask.edit().putBoolean("finish05",true).commit();
 				//changeScene();
+				startActivityForResult(intent_camera, 0);
 				}
 				break;
 			}
+			
 		}
 	};
+	
+	//拍完照後的回傳動作
+	 @Override
+	  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		 //提示使用者獲得拼圖
+		 new AlertDialog.Builder(this)   
+	        .setTitle("Congratulations")
+	        .setMessage("You get a puzzle, Let's to check out it!")
+	        .setPositiveButton("Ok", null)
+	        .show();
+		 
+		 if (resultCode == RESULT_OK)
+	     {
+			// 取出拍照後回傳資料
+			Bundle extras = data.getExtras();
+			// 將資料轉換為圖像格式
+			Bitmap bmp = (Bitmap) extras.get("data");
+			// 將Bitmap轉為Drawable
+			Drawable drawable = new BitmapDrawable(bmp);
+			// 設背景
+			mainLayout.setBackground(drawable);
+	     }
+	 }
 	
 	//檢查任務是否已被完成
 	public void checkTask() {
@@ -236,10 +269,12 @@ public class MainActivity extends Activity {
 		    	 // do not anything
 		    	  break;
 		      case R.id.puzzle_btn: 
+		    	  playMusic();
 		    	 intent = new Intent(MainActivity.this, PuzzleActivity.class);
 		    	 startActivity(intent);
 		    	 break;
 		      case R.id.task_btn:
+		    	  playMusic();
 		    	 intent = new Intent(MainActivity.this, EventActivity.class);
 		    	 startActivity(intent);
 		    	 break;
@@ -248,6 +283,10 @@ public class MainActivity extends Activity {
 	
 	};
 	
+	public void playMusic() {
+		MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.push);
+  	    mp.start();
+	}
 	//
 	public void savePuzzle() {
 		DrawnPuzzles dp = new DrawnPuzzles();
@@ -261,11 +300,7 @@ public class MainActivity extends Activity {
 		Log.i("PuzzleDB","SQL:record inserted, id=" + rowid);
 //		Toast.makeText(this, "Congratulations, get NO." + i + "puzzle",
 //		          Toast.LENGTH_LONG).show();
-		new AlertDialog.Builder(this)   
-        .setTitle("Congratulations")
-        .setMessage("You get a puzzle, Let's to check out it!")
-        .setPositiveButton("Ok", null)
-        .show();
+		
 		db.close();
 		
 	}

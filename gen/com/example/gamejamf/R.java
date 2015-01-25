@@ -18,8 +18,8 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int add_event_icon=0x7f020000;
@@ -86,61 +86,52 @@ public final class R {
         public static final int puzzle9=0x7f02003d;
         public static final int puzzle_btn=0x7f02003e;
         public static final int puzzle_icon0=0x7f02003f;
-        public static final int puzzle_icon01=0x7f020040;
-        public static final int puzzle_icon02=0x7f020041;
-        public static final int puzzle_icon03=0x7f020042;
-        public static final int puzzle_icon04=0x7f020043;
-        public static final int puzzle_icon05=0x7f020044;
-        public static final int puzzle_icon06=0x7f020045;
-        public static final int puzzle_icon07=0x7f020046;
-        public static final int puzzle_icon08=0x7f020047;
-        public static final int puzzle_icon09=0x7f020048;
-        public static final int puzzle_icon1=0x7f020049;
-        public static final int puzzle_icon2=0x7f02004a;
-        public static final int puzzle_icon3=0x7f02004b;
-        public static final int puzzle_icon4=0x7f02004c;
-        public static final int puzzle_top=0x7f02004d;
-        public static final int task_btn=0x7f02004e;
-        public static final int text_animation=0x7f02004f;
-        public static final int top=0x7f020050;
-        public static final int wash=0x7f020051;
-        public static final int waving=0x7f020052;
-        public static final int welcome=0x7f020053;
+        public static final int puzzle_icon1=0x7f020040;
+        public static final int puzzle_icon2=0x7f020041;
+        public static final int puzzle_icon3=0x7f020042;
+        public static final int puzzle_icon4=0x7f020043;
+        public static final int puzzle_top=0x7f020044;
+        public static final int task_btn=0x7f020045;
+        public static final int text_animation=0x7f020046;
+        public static final int top=0x7f020047;
+        public static final int wash=0x7f020048;
+        public static final int waving=0x7f020049;
+        public static final int welcome=0x7f02004a;
     }
     public static final class id {
-        public static final int LinearLayout2=0x7f080001;
-        public static final int action_settings=0x7f080020;
-        public static final int event=0x7f080011;
-        public static final int frag1=0x7f080016;
-        public static final int frag2=0x7f080017;
-        public static final int frag3=0x7f080018;
-        public static final int frag4=0x7f080019;
-        public static final int frag5=0x7f08001a;
-        public static final int frag6=0x7f08001b;
-        public static final int frag7=0x7f08001c;
-        public static final int frag8=0x7f08001d;
-        public static final int frag9=0x7f08001e;
-        public static final int gif1=0x7f080003;
-        public static final int go=0x7f080000;
-        public static final int home=0x7f08000a;
-        public static final int home_btn=0x7f080013;
-        public static final int imageView0=0x7f080015;
-        public static final int imageView1=0x7f08000b;
-        public static final int mainLayout=0x7f080002;
-        public static final int puzzle=0x7f08001f;
-        public static final int puzzle_btn=0x7f080014;
-        public static final int scrollView1=0x7f080004;
-        public static final int task1=0x7f08000c;
-        public static final int task2=0x7f08000d;
-        public static final int task3=0x7f08000e;
-        public static final int task4=0x7f08000f;
-        public static final int task5=0x7f080010;
-        public static final int taskText1=0x7f080005;
-        public static final int taskText2=0x7f080006;
-        public static final int taskText3=0x7f080007;
-        public static final int taskText4=0x7f080008;
-        public static final int taskText5=0x7f080009;
-        public static final int task_btn=0x7f080012;
+        public static final int LinearLayout2=0x7f090001;
+        public static final int action_settings=0x7f090020;
+        public static final int event=0x7f090011;
+        public static final int frag1=0x7f090016;
+        public static final int frag2=0x7f090017;
+        public static final int frag3=0x7f090018;
+        public static final int frag4=0x7f090019;
+        public static final int frag5=0x7f09001a;
+        public static final int frag6=0x7f09001b;
+        public static final int frag7=0x7f09001c;
+        public static final int frag8=0x7f09001d;
+        public static final int frag9=0x7f09001e;
+        public static final int gif1=0x7f090003;
+        public static final int go=0x7f090000;
+        public static final int home=0x7f09000a;
+        public static final int home_btn=0x7f090013;
+        public static final int imageView0=0x7f090015;
+        public static final int imageView1=0x7f09000b;
+        public static final int mainLayout=0x7f090002;
+        public static final int puzzle=0x7f09001f;
+        public static final int puzzle_btn=0x7f090014;
+        public static final int scrollView1=0x7f090004;
+        public static final int task1=0x7f09000c;
+        public static final int task2=0x7f09000d;
+        public static final int task3=0x7f09000e;
+        public static final int task4=0x7f09000f;
+        public static final int task5=0x7f090010;
+        public static final int taskText1=0x7f090005;
+        public static final int taskText2=0x7f090006;
+        public static final int taskText3=0x7f090007;
+        public static final int taskText4=0x7f090008;
+        public static final int taskText5=0x7f090009;
+        public static final int task_btn=0x7f090012;
     }
     public static final class layout {
         public static final int activity_loadding=0x7f030000;
@@ -150,13 +141,16 @@ public final class R {
         public static final int check_puzzle=0x7f030004;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
+        public static final int main=0x7f080000;
+    }
+    public static final class raw {
+        public static final int push=0x7f040000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050002;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050001;
-        public static final int task1=0x7f050003;
+        public static final int action_settings=0x7f060002;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060001;
+        public static final int task1=0x7f060003;
     }
     public static final class style {
         /** 
@@ -180,10 +174,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,6 +58,12 @@ public class PuzzleActivity extends Activity {
 //		frag7.setOnClickListener(imageListener);
 //		frag8.setOnClickListener(imageListener);
 //		frag9.setOnClickListener(imageListener);
+	}
+	
+	protected void playMusic() {
+		// TODO Auto-generated method stub
+		MediaPlayer mp = MediaPlayer.create(PuzzleActivity.this, R.raw.push);
+  	    mp.start();
 	}
 	
 	private OnClickListener imageListener = new OnClickListener() {
@@ -350,7 +357,7 @@ public class PuzzleActivity extends Activity {
 		frag9.setImageDrawable(getResources().getDrawable(R.drawable.none));
 	}
 	
-	
+	//下方button
 	private OnClickListener mainListener = new OnClickListener() {
 
 		@Override
@@ -360,6 +367,7 @@ public class PuzzleActivity extends Activity {
 			switch (v.getId())
 		    {      
 		      case R.id.home_btn:  
+		    	  playMusic();
 		    	intent = new Intent(PuzzleActivity.this, MainActivity.class);
 			    startActivity(intent);
 		    	break;
@@ -367,6 +375,7 @@ public class PuzzleActivity extends Activity {
 		    	//don't do
 		    	break;
 		      case R.id.task_btn:
+		    	  playMusic();
 		    	intent = new Intent(PuzzleActivity.this, EventActivity.class);
 			    startActivity(intent);
 			    break;
