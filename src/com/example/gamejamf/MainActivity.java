@@ -10,6 +10,7 @@ import com.ant.liao.GifView;
 import com.ant.liao.GifView.GifImageType;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,11 +37,13 @@ public class MainActivity extends Activity {
 	Random rand = new Random();
 	int scene=0;
 	GifView gf1;
+	RelativeLayout mainLayout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
 		
 		//set bottom click event
 		home = (View)findViewById(R.id.home);
@@ -58,8 +62,8 @@ public class MainActivity extends Activity {
 	    //設定動畫
 		gf1 = (GifView)findViewById(R.id.gif1);
 		changeScene();
-		gf1.setShowDimension(metrics.widthPixels, metrics.heightPixels*3/7);
-		gf1.setGifImageType(GifImageType.COVER);
+//		gf1.setShowDimension(metrics.widthPixels, metrics.heightPixels*3/7);
+		gf1.setGifImageType(GifImageType.SYNC_DECODER);
 
 		
 		//任務訊息
@@ -87,21 +91,47 @@ public class MainActivity extends Activity {
 
 	//改變場景
 	private void changeScene() {
-		scene  = rand.nextInt(3);
+		scene = rand.nextInt(3);
 		switch(scene) {
 		case 0:
-			
-			gf1.setGifImage(R.drawable.waving);
-			Log.i("change", "sence:0");
+			mainLayout.setBackground(getResources().getDrawable(R.drawable.bathroom));
 			break;
 		case 1:
-			
-			gf1.setGifImage(R.drawable.mopping_kitchen);
-			Log.i("change", "sence:1");
+			mainLayout.setBackground(getResources().getDrawable(R.drawable.living_room));
 			break;
 		case 2:
+			mainLayout.setBackground(getResources().getDrawable(R.drawable.kitchen));
+			break;
+		}
+		scene  = rand.nextInt(5);
+//		scene = 0;
+		switch(scene) {
+		case 0:
+			gf1.setGifImage(R.drawable.text_animation);
 			
-			gf1.setGifImage(R.drawable.house);
+//			gf1.setGifImage(R.drawable.waving);
+			Log.i("change", "sence:0");
+			
+			break;
+		case 1:
+
+			gf1.setGifImage(R.drawable.moppingthefloor);
+			Log.i("change", "sence:1");
+			
+			break;
+		case 2:
+
+			gf1.setGifImage(R.drawable.waving);
+			Log.i("change", "sence:2");
+			break;
+		case 3:
+
+			gf1.setGifImage(R.drawable.clean);
+			Log.i("change", "sence:2");
+			break;
+		case 4:
+
+			gf1.setGifImage(R.drawable.wash);
 			Log.i("change", "sence:2");
 		}
 		
@@ -124,6 +154,7 @@ public class MainActivity extends Activity {
 				//儲存完成的任務
 				getTask.edit().putBoolean("finish01",true).commit();
 				//changeScene();
+				
 				}
 				break;
 			case R.id.taskText2:
@@ -132,6 +163,7 @@ public class MainActivity extends Activity {
 				savePuzzle();
 				getTask.edit().putBoolean("finish02",true).commit();
 				//changeScene();
+				
 				}
 				break;
 			case R.id.taskText3:
@@ -223,11 +255,17 @@ public class MainActivity extends Activity {
 		SQLiteDatabase db = pdb.getWritableDatabase();
 		ContentValues args = new ContentValues();
 		int i = dp.draw();
+		
 		args.put("PUZZLE_FRAG", i);
 		long rowid = db.insert("INCOME", null, args);
 		Log.i("PuzzleDB","SQL:record inserted, id=" + rowid);
-		Toast.makeText(this, "Congratulations, get NO." + i + "puzzle",
-		          Toast.LENGTH_LONG).show();
+//		Toast.makeText(this, "Congratulations, get NO." + i + "puzzle",
+//		          Toast.LENGTH_LONG).show();
+		new AlertDialog.Builder(this)   
+        .setTitle("Congratulations")
+        .setMessage("You get a puzzle, Let's to check out it!")
+        .setPositiveButton("Ok", null)
+        .show();
 		db.close();
 		
 	}
