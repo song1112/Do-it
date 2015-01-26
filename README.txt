@@ -1,6 +1,6 @@
 Do-it
 
-Global Game Jam 2015 Kaohsiung work
+Global Game Jam 2015 Kaohsiung works
 
 A Task game.
 
