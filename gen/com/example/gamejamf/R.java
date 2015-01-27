@@ -86,17 +86,26 @@ public final class R {
         public static final int puzzle9=0x7f02003d;
         public static final int puzzle_btn=0x7f02003e;
         public static final int puzzle_icon0=0x7f02003f;
-        public static final int puzzle_icon1=0x7f020040;
-        public static final int puzzle_icon2=0x7f020041;
-        public static final int puzzle_icon3=0x7f020042;
-        public static final int puzzle_icon4=0x7f020043;
-        public static final int puzzle_top=0x7f020044;
-        public static final int task_btn=0x7f020045;
-        public static final int text_animation=0x7f020046;
-        public static final int top=0x7f020047;
-        public static final int wash=0x7f020048;
-        public static final int waving=0x7f020049;
-        public static final int welcome=0x7f02004a;
+        public static final int puzzle_icon01=0x7f020040;
+        public static final int puzzle_icon02=0x7f020041;
+        public static final int puzzle_icon03=0x7f020042;
+        public static final int puzzle_icon04=0x7f020043;
+        public static final int puzzle_icon05=0x7f020044;
+        public static final int puzzle_icon06=0x7f020045;
+        public static final int puzzle_icon07=0x7f020046;
+        public static final int puzzle_icon08=0x7f020047;
+        public static final int puzzle_icon09=0x7f020048;
+        public static final int puzzle_icon1=0x7f020049;
+        public static final int puzzle_icon2=0x7f02004a;
+        public static final int puzzle_icon3=0x7f02004b;
+        public static final int puzzle_icon4=0x7f02004c;
+        public static final int puzzle_top=0x7f02004d;
+        public static final int task_btn=0x7f02004e;
+        public static final int text_animation=0x7f02004f;
+        public static final int top=0x7f020050;
+        public static final int wash=0x7f020051;
+        public static final int waving=0x7f020052;
+        public static final int welcome=0x7f020053;
     }
     public static final class id {
         public static final int LinearLayout2=0x7f090001;

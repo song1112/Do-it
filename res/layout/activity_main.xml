@@ -1,17 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"   
+    android:layout_weight="1"
     android:orientation="vertical"
     android:background="@drawable/background"
-    tools:context="com.example.gamejamf.MainActivity" >
+    android:layout_gravity="fill"
+    android:gravity="fill" >
 
     <RelativeLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:gravity="bottom"
         android:background="@drawable/living_room" >
 
@@ -31,14 +32,15 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="20"
-        android:scrollbars="none" >
+        android:layout_weight="0.5"
+        android:scrollbars="none"
+        android:background="@drawable/event_bkground" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@drawable/event_bkground" >
+             >
 
             <LinearLayout
                 android:layout_width="match_parent"
